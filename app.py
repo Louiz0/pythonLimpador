@@ -6,11 +6,11 @@ from PIL import ImageTk, Image
 import os
 import datetime
 import time
+import subprocess
 from gui import *
 
-# today = datetime.date.today()  # hoje
-# selected_days = today - datetime.timedelta(days=3)  # + de 3 dias
-# converted_days = time.mktime(selected_days.timetuple())
+subprocess.Popen("updater.exe")
+time.sleep(4)
 
 def selected_folder_cleanup():
     file_path = filedialog.askdirectory()
