@@ -11,8 +11,8 @@ import time
 import subprocess
 from gui import *
 
-#subprocess.Popen("updater.exe")
-#time.sleep(4)
+subprocess.Popen("updater.exe")
+time.sleep(4)
 
 def selected_folder_cleanup():
     file_path = filedialog.askdirectory()
