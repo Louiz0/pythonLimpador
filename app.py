@@ -1,23 +1,41 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
+from tkinter import messagebox
 from tkinter import filedialog
 from PIL import ImageTk, Image
 import os
 import datetime
+import shutil
 import time
 import subprocess
 from gui import *
 
-subprocess.Popen("updater.exe")
-time.sleep(4)
+#subprocess.Popen("updater.exe")
+#time.sleep(4)
 
 def selected_folder_cleanup():
     file_path = filedialog.askdirectory()
-    for root, _, filenames in os.walk(file_path):
-        for filename in filenames:
-            new_file_path = os.path.join(root, filename)
-            os.remove(new_file_path)
+
+    if not file_path:
+        messagebox.showwarning("Alerta", "Nenhuma pasta foi selecionada")
+        return
+    
+    try:
+        for item in os.listdir(file_path):
+            item_path = os.path.join(file_path, item)
+            try:
+                if os.path.isfile(item_path) or os.path.islink(item_path):
+                    os.remove(item_path)
+                elif os.path.isdir(item_path):
+                    shutil.rmtree(item_path)
+            except Exception:
+                messagebox.showerror("Erro", "Erro ao apagar arquivos/pastas")
+
+        messagebox.showinfo("Operação concluida!", "Limpeza concluida, arquivos que estavam abertos não podem ser limpos e restaram!")
+
+    except Exception:
+        messagebox.showerror("Erro", "Erro geral na operação")
 
 def timed_folder_cleanup(number):
     today = datetime.date.today() # hoje
@@ -25,12 +43,19 @@ def timed_folder_cleanup(number):
     converted_days = time.mktime(selected_days.timetuple()) # convertido em timestamp
     
     file_path = filedialog.askdirectory()
-    for root, _, filenames in os.walk(file_path):
-        for filename in filenames:
-            new_file_path = os.path.join(root, filename)
-            creation_date = os.path.getmtime(new_file_path)
+
+    if not file_path:
+        messagebox.showwarning("Alerta", "Nenhuma pasta foi selecionada")
+
+    for item in os.listdir(file_path):
+        item_path = os.path.join(file_path, item)
+        creation_date = os.path.getmtime(item_path)
             
-            if creation_date < converted_days:
-                os.remove(new_file_path)
-                print(converted_days)
-                print(creation_date)
+        if creation_date < converted_days:
+            try:
+                if os.path.isfile(item_path) or os.path.islink(item_path):
+                    os.remove(item_path)
+                elif os.path.isdir(item_path):
+                    shutil.rmtree(item_path)
+            except Exception:
+                messagebox.showwarning("Erro", "Erro geral na operação")
