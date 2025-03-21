@@ -1,6 +1,6 @@
 [project]
 name = "limpador"
-version = "0.0.4"
+version = "0.0.5"
 description = ""
 authors = [
     {name = "Luiz Felipe Mantoani Fantini",email = "felipefantini1@hotmail.com"}

@@ -40,7 +40,7 @@ label_main_text = ttk.Label (
 label_main_text.place(x = 50, y = 0)
 
 label_version = ttk.Label (
-    text = "0.0.4", font = "Helvetica 10 bold"
+    text = "0.0.5", font = "Helvetica 10 bold"
 )
 label_version.place(x = 10, y = 180)
 

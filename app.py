@@ -8,11 +8,9 @@ import os
 import datetime
 import shutil
 import time
-import subprocess
 from gui import *
 
-subprocess.Popen("updater.exe")
-time.sleep(4)
+os.startfile("updater.exe")
 
 def selected_folder_cleanup():
     file_path = filedialog.askdirectory()
