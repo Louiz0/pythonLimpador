@@ -3,21 +3,25 @@ import requests
 from tkinter import messagebox
 import os
 
-URL_new_version = urllib.request.urlopen("https://raw.githubusercontent.com/Louiz0/pythonLimpador/refs/heads/main/version.txt")
+URL = ("https://raw.githubusercontent.com/Louiz0/pythonLimpador/refs/heads/main/version.txt")
+URL_new_version = urllib.request.urlopen(URL)
 
 with open("version.txt", encoding='utf-8') as file:
     old_data = file.read()
+print(old_data)
 
 new_data = URL_new_version.read().decode("utf-8")
+print (new_data)
 
 def search_updates():
     if old_data != new_data:
-        need_update(new_data)
+        need_update(new_data, URL)
 
-def need_update(new_data_variable):
+def need_update(new_data_variable, new_version_URL):
+    print(new_data_variable)
     os.system("taskkill /f /im app.exe")
 
-    resposta = requests.get(new_data_variable)
+    resposta = requests.get(new_version_URL)
     file = open("version.txt", "w")
     file.write(resposta.text)
 
