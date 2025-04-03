@@ -40,12 +40,12 @@ label_main_text = ttk.Label (
 label_main_text.place(x = 50, y = 0)
 
 label_version = ttk.Label (
-    text = "0.0.5", font = "Helvetica 10 bold"
+    text = "0.0.6", font = "Helvetica 10 bold"
 )
 label_version.place(x = 10, y = 180)
 
 label_selected_cleanup = ttk.Label (
-    text = "Limpeza por Pasta Selecionada", font = "Helvetica 10 bold"
+    text = "Limpeza de Arquivos Temporários", font = "Helvetica 10 bold"
 )
 label_selected_cleanup.place(x = 30, y = 30)
 
@@ -56,7 +56,7 @@ label_timed_folder_cleanup.place(x = 320, y = 30)
 
 # BUTTONS
 button_clear_folders = ttk.Button (
-    main_window, text = "Escolher pasta", command = selected_folder_cleanup
+    main_window, text = "Limpar", command = windows_cache_cleanup
 )
 button_clear_folders.place(x = 80, y = 55, width = 100, height = 50)
 

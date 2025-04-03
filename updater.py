@@ -8,10 +8,8 @@ URL_new_version = urllib.request.urlopen(URL)
 
 with open("version.txt", encoding='utf-8') as file:
     old_data = file.read()
-print(old_data)
 
 new_data = URL_new_version.read().decode("utf-8")
-print (new_data)
 
 def search_updates():
     if old_data != new_data:
