@@ -1,8 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
-from tkinter import *
-from tkinter import messagebox
-from tkinter import filedialog
+from tkinter import ttk, messagebox, filedialog, Toplevel
 from PIL import ImageTk, Image
 import os
 import datetime
@@ -36,39 +33,22 @@ def timed_folder_cleanup(number):
                 messagebox.showwarning("Erro", "Erro geral na operação")
                 
 def windows_cache_cleanup():
-    current_user = os.getlogin()
     
-    file_path_prefetch, file_path_temp, file_path_user_temp = "C:\\Windows\\Prefetch", "C:\\Windows\\Temp", f"C:\\Users\\{current_user}\\AppData\\Local\\Temp\\*"
+    file_path_prefetch = "C:\\Windows\\Prefetch"
+    file_path_temp = "C:\\Windows\\Temp"
+    file_path_user_temp = os.environ.get('TEMP')
     
-    try:
-        for item in os.listdir(file_path_prefetch):
-            item_path_prefetch = os.path.join(file_path_prefetch, item)
-            
-            if os.path.isfile(item_path_prefetch) or os.path.islink(item_path_prefetch):
-                os.remove(item_path_prefetch)
-            elif os.path.isdir(item_path_prefetch):
-                shutil.rmtree(item_path_prefetch)
-        
-        for item in os.listdir(file_path_temp):
-            item_path_temp = os.path.join(file_path_temp, item)
-            
-            if os.path.isfile(item_path_temp) or os.path.islink(item_path_temp):
-                os.remove(item_path_temp)
-            elif os.path.isdir(item_path_temp):
-                shutil.rmtree(item_path_temp)
-
-        for item in os.listdir(file_path_user_temp):
-            item_path_user_temp = os.path.join(file_path_user_temp, item)
-            
-            try:
-                if os.path.isfile(item_path_user_temp) or os.path.islink(item_path_user_temp):
-                    os.remove(item_path_user_temp)
-                elif os.path.isdir(item_path_user_temp):
-                    shutil.rmtree(item_path_user_temp)
-            except OSError:
-                pass
-    except OSError:
-        pass
-    
-    print(file_path_user_temp)
-    messagebox.showinfo("Operação concluida!", "Limpeza concluida, arquivos que estavam abertos não podem ser limpos e restaram!")
+    for path in [file_path_prefetch, file_path_temp, file_path_user_temp]:
+        try:
+            for item in os.listdir(path):
+                item_path = os.path.join(path, item)
+                try:
+                    if os.path.isfile(item_path) or os.path.islink(item_path):
+                        os.remove(item_path)
+                    elif os.path.isdir(item_path):
+                        shutil.rmtree(item_path, ignore_errors=True)
+                except Exception as e:
+                    print(f"Erro ao excluir {item_path}: {e}")
+        except Exception as e:
+            print(f"Erro ao listar {path}: {e}")
+    messagebox.showinfo("Operação concluída", "Limpeza concluída. Alguns arquivos podem não ter sido removidos pois estavam em uso ou protegidos.")
