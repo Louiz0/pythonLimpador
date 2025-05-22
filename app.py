@@ -7,7 +7,7 @@ import shutil
 import time
 from gui import *
 
-os.startfile("updater.exe")
+#os.startfile("updater.exe")
 
 def timed_folder_cleanup(number):
     today = datetime.date.today() # hoje
