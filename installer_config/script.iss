@@ -3,7 +3,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{1200B6CB-1616-4E67-895B-4C200D1AB203}
+AppId={{110769B5-48E2-439E-B69D-1A082F519CBB}
 AppName=Limpador
 AppVersion=0.0.7
 ;AppVerName=Limpador 0.0.7
@@ -38,10 +38,10 @@ Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortugue
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\felip\Desktop\Git\pythonLimpador\app.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\felip\Desktop\Git\pythonLimpador\images\*"; DestDir: "{app}\images"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\felip\Desktop\Git\pythonLimpador\dist\app.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\felip\Desktop\Git\pythonLimpador\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\felip\Desktop\Git\pythonLimpador\version.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\felip\Desktop\Git\pythonLimpador\images\*"; DestDir: "{app}\images"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
