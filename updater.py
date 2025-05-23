@@ -11,9 +11,11 @@ with open("version.txt", encoding='utf-8') as file:
 
 new_data = URL_new_version.read().decode("utf-8")
 
+
 def search_updates():
     if old_data != new_data:
         need_update(new_data, URL)
+
 
 def need_update(new_data_variable, new_version_URL):
     print(new_data_variable)
@@ -27,6 +29,7 @@ def need_update(new_data_variable, new_version_URL):
 
     new_version = requests.get(f"https://github.com/Louiz0/pythonLimpador/releases/download/{new_data_variable}/app.exe")
     open("app.exe", "wb").write(new_version.content)
+
 
 if __name__ == "__main__":
     search_updates()
